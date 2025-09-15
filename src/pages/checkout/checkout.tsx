@@ -69,7 +69,7 @@ const Checkout = () => {
       // dispatch(clearCart());
       reset();
     } catch (error: any) {
-      toast.error(error.message || "Buyurtma qabul qilinmadi!");
+      toast.error(error.message || "Xatolik yuz berdi!");
       console.error("Checkout error:", error.message);
     } finally {
       setLoading(false);
