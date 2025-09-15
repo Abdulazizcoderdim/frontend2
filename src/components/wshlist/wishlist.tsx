@@ -1,22 +1,22 @@
-import { cn } from '@/lib/utils';
-import { addItem, deleteItem, moveAllToCart } from '@/redux/cartSlice';
+import { cn } from "@/lib/utils";
+import { addItem, deleteItem, moveAllToCart } from "@/redux/cartSlice";
 import {
   clearWishList,
   deleteWishList,
   getTotalWishListQuantity,
-} from '@/redux/wishlistSlice';
-import { ProductType } from '@/type';
-import { Trash } from 'lucide-react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'sonner';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import { A11y, Navigation, Pagination } from 'swiper/modules';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import JustForYou from '../just-you/just-for-you';
-import MaxWidth from '../max-width';
-import { Button } from '../ui/button';
+} from "@/redux/wishlistSlice";
+import { IProduct } from "@/type";
+import { Trash } from "lucide-react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
+import "swiper/css";
+import "swiper/css/navigation";
+import { A11y, Navigation, Pagination } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+import JustForYou from "../just-you/just-for-you";
+import MaxWidth from "../max-width";
+import { Button } from "../ui/button";
 
 const Wishlist = () => {
   const dispatch = useDispatch();
@@ -26,25 +26,25 @@ const Wishlist = () => {
 
   const wishlistItems = useSelector((state: any) => state.wishList.wishList);
 
-  const handleCartToggle = (product: ProductType) => {
+  const handleCartToggle = (product: IProduct) => {
     const isInCart = cartItems.some(
-      (item: ProductType) => item._id === product._id
+      (item: IProduct) => item._id === product._id
     );
 
     if (isInCart) {
       dispatch(deleteItem(product._id)); // Agar mahsulot savatda bo'lsa, olib tashlash
-      toast.success('Product removed from cart');
+      toast.success("Product removed from cart");
     } else {
       dispatch(
         addItem({
           _id: product._id,
-          name: product.name,
-          price: product.price.currentPrice,
+          name: product.title,
+          price: product.price,
           quantity: 1,
-          imageUrl: product.imageUrl,
+          imageUrl: product.images[0],
         })
       );
-      toast.success('Product added to cart');
+      toast.success("Product added to cart");
     }
   };
 
@@ -55,7 +55,7 @@ const Wishlist = () => {
   const moveAllToBag = () => {
     dispatch(moveAllToCart(wishlistItems));
     dispatch(clearWishList());
-    toast.success('All products added to cart');
+    toast.success("All products added to cart");
   };
 
   return (
@@ -63,7 +63,7 @@ const Wishlist = () => {
       <MaxWidth className="py-20 space-y-5">
         <div className="flex justify-between gap-3">
           <p className="font-normal text-xl">Wishlist ({totalWishListItems})</p>
-          <Button onClick={moveAllToBag} variant={'outline'} size={'lg'}>
+          <Button onClick={moveAllToBag} variant={"outline"} size={"lg"}>
             Move All To Bag
           </Button>
         </div>
@@ -81,7 +81,7 @@ const Wishlist = () => {
             >
               {wishlistItems.map((product: any, i: number) => {
                 const isInCart = cartItems.some(
-                  (item: ProductType) => item._id === product._id
+                  (item: IProduct) => item._id === product._id
                 );
                 // ); // Mahsulot savatda ekanligini tekshirish
                 // const isInWishList = wishlistItems.some(
@@ -113,16 +113,16 @@ const Wishlist = () => {
 
                         <button
                           onClick={() => handleCartToggle(product)}
-                          title={isInCart ? 'Remove from cart' : 'Add to cart'}
+                          title={isInCart ? "Remove from cart" : "Add to cart"}
                           className={cn(
-                            'absolute transition-all duration-300 rounded-b-md cursor-pointer bottom-0 right-0 left-0 w-full bg-black text-white text-center py-2',
+                            "absolute transition-all duration-300 rounded-b-md cursor-pointer bottom-0 right-0 left-0 w-full bg-black text-white text-center py-2",
                             isInCart
-                              ? 'bg-transparent border border-red text-red'
-                              : ''
+                              ? "bg-transparent border border-red text-red"
+                              : ""
                           )}
                         >
                           <p className="text-center font-medium text-base">
-                            {isInCart ? 'Remove from Cart' : 'Add To Cart'}
+                            {isInCart ? "Remove from Cart" : "Add To Cart"}
                           </p>
                         </button>
                       </div>

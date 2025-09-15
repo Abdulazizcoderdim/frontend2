@@ -1,4 +1,3 @@
-import AdminPanel from "@/components/admin/admin-panel";
 import AllProducts from "@/components/AllProducts";
 import BuyNow from "@/components/BuyNow";
 import Cart from "@/components/cart/cart";
@@ -44,10 +43,6 @@ export const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login />,
-      },
-      {
-        path: "/admin-panel",
-        element: <AdminPanel />,
       },
       {
         path: "/cart",

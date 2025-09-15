@@ -1,40 +1,39 @@
-import { valueCount } from '@/hooks/useCountStar';
-import { cn } from '@/lib/utils';
-import { addItem, deleteItem } from '@/redux/cartSlice';
-import { ProductType } from '@/type';
-import { useEffect, useState } from 'react';
-import { FaStar } from 'react-icons/fa';
-import { PiShoppingCartThin } from 'react-icons/pi';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'sonner';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import { A11y, Navigation, Pagination } from 'swiper/modules';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Button } from '../ui/button';
+import { valueCount } from "@/hooks/useCountStar";
+import { cn } from "@/lib/utils";
+import { addItem, deleteItem } from "@/redux/cartSlice";
+import { IProduct } from "@/type";
+import { useEffect, useState } from "react";
+import { FaStar } from "react-icons/fa";
+import { PiShoppingCartThin } from "react-icons/pi";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
+import "swiper/css";
+import "swiper/css/navigation";
+import { A11y, Navigation, Pagination } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Button } from "../ui/button";
 
 const JustForYou = () => {
-  const [todayProduct, setTodayProduct] = useState<ProductType[]>([]);
+  const [todayProduct, setTodayProduct] = useState<IProduct[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // Redux store'dan savatdagi mahsulotlarni olish
   const cartItems = useSelector((state: any) => state.cart.cart);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          import.meta.env.VITE_PUBLIC_API_URL + '/product/get-products'
+          import.meta.env.VITE_PUBLIC_API_URL + "/product/get-products"
         );
         if (!response.ok) {
           throw new Error("Ma'lumotlarni olishda xatolik yuz berdi");
         }
-        const data: ProductType[] = await response
+        const data: IProduct[] = await response
           .json()
-          .then(data => data.reverse());
+          .then((data) => data.reverse());
         setTodayProduct(data);
         setLoading(false);
       } catch (error: any) {
@@ -46,25 +45,25 @@ const JustForYou = () => {
     fetchData();
   }, []);
 
-  const handleCartToggle = (product: ProductType) => {
+  const handleCartToggle = (product: IProduct) => {
     const isInCart = cartItems.some(
-      (item: ProductType) => item._id === product._id
+      (item: IProduct) => item._id === product._id
     );
 
     if (isInCart) {
-      dispatch(deleteItem(product._id)); // Agar mahsulot savatda bo'lsa, olib tashlash
-      toast.success('Product removed from cart');
+      dispatch(deleteItem(product._id));
+      toast.success("Product removed from cart");
     } else {
       dispatch(
         addItem({
           _id: product._id,
-          name: product.name,
-          price: product.price.currentPrice,
+          name: product.title,
+          price: product.price,
           quantity: 1,
-          imageUrl: product.imageUrl,
+          imageUrl: product.images[0],
         })
       );
-      toast.success('Product added to cart');
+      toast.success("Product added to cart");
     }
   };
 
@@ -76,7 +75,7 @@ const JustForYou = () => {
           <p className="text-red font-semibold text-base">Just For You</p>
         </div>
 
-        <Button size={'lg'} variant={'outline'}>
+        <Button size={"lg"} variant={"outline"}>
           See All
         </Button>
       </div>
@@ -92,8 +91,8 @@ const JustForYou = () => {
         {loading && <p>Loading...</p>}
         {todayProduct.map((product, i) => {
           const isInCart = cartItems.some(
-            (item: ProductType) => item._id === product._id
-          ); // Mahsulot savatda ekanligini tekshirish
+            (item: IProduct) => item._id === product._id
+          );
 
           return (
             <SwiperSlide key={i} className="min-h-[350px]">
@@ -102,9 +101,7 @@ const JustForYou = () => {
                   <div className="h-44 w-44">
                     <img
                       onClick={() => navigate(`/products/${product._id}`)}
-                      src={`${import.meta.env.VITE_PUBLIC_IMAGE_URL}/${
-                        product.imageUrl
-                      }`}
+                      src={product.images[0]}
                       className="object-contain h-full w-full"
                       alt="Product image"
                     />
@@ -115,17 +112,17 @@ const JustForYou = () => {
 
                   <button
                     onClick={() => handleCartToggle(product)}
-                    title={isInCart ? 'Remove from cart' : 'Add to cart'}
+                    title={isInCart ? "Remove from cart" : "Add to cart"}
                     className={cn(
-                      'absolute transition-all duration-300 rounded-b-md cursor-pointer bottom-0 right-0 left-0 w-full bg-black text-white text-center py-2',
+                      "absolute transition-all duration-300 rounded-b-md cursor-pointer bottom-0 right-0 left-0 w-full bg-black text-white text-center py-2",
                       isInCart
-                        ? 'bg-transparent border border-red text-red'
-                        : ''
+                        ? "bg-transparent border border-red text-red"
+                        : ""
                     )}
                   >
                     <p className="text-center flex justify-center font-medium text-base">
                       {isInCart ? (
-                        'Remove from Cart'
+                        "Remove from Cart"
                       ) : (
                         <span className="flex items-center gap-2">
                           <PiShoppingCartThin className="w-8 h-8" />
@@ -135,26 +132,26 @@ const JustForYou = () => {
                     </p>
                   </button>
                 </div>
-                <p className="font-medium text-base">{product.name}</p>
+                <p className="font-medium text-base">{product.title}</p>
                 <div className="space-x-3">
                   <span className="font-medium text-base text-red">
-                    ${product.price.currentPrice}
+                    ${product.price}
                   </span>
                   <span className="line-through font-medium text-base text-zinc-600">
-                    ${product.price.originalPrice}
+                    ${product.oldPrice}
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
                   {Array.from(
-                    { length: Math.floor(product.ratings.value) },
+                    { length: Math.floor(product.rating) },
                     (_, i) => (
                       <FaStar key={i} className="text-star" />
                     )
                   )}
 
-                  {valueCount(product.ratings.value)}
+                  {valueCount(product.rating)}
                   <span className="font-medium text-base">
-                    ({product.ratings.count})
+                    ({product.numReviews})
                   </span>
                 </div>
               </div>
