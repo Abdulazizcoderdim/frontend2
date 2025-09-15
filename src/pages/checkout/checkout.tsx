@@ -69,6 +69,7 @@ const Checkout = () => {
       // dispatch(clearCart());
       reset();
     } catch (error: any) {
+      toast.error(error.message || "Buyurtma qabul qilinmadi!");
       console.error("Checkout error:", error.message);
     } finally {
       setLoading(false);
