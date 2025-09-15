@@ -11,7 +11,6 @@ import Layout from "@/layout/layout";
 import NotFoundPage from "@/pages/404/not-found";
 import About from "@/pages/about/about";
 import Checkout from "@/pages/checkout/checkout";
-import { ComunityPage } from "@/pages/comunity/comunity-page";
 import Contact from "@/pages/contact/contact";
 import GetOne from "@/pages/get-one/get-one";
 import Home from "@/pages/home/home";
@@ -85,10 +84,6 @@ export const router = createBrowserRouter([
       {
         path: "/shop",
         element: <AllProducts />,
-      },
-      {
-        path: "/comunity",
-        element: <ComunityPage />,
       },
     ],
   },
