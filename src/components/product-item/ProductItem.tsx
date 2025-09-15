@@ -14,12 +14,9 @@ const ProductItem = ({ product }: { product: IProduct }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // Redux store'dan savatdagi mahsulotlarni olish
   const cartItems = useSelector((state: any) => state.cart.cart);
-  // wishlistdagi ma'lumotlar
   const wishlistItems = useSelector((state: any) => state.wishList.wishList);
 
-  // Savatga qo'shish yoki olib tashlash funksiyasi
   const handleCartToggle = (product: IProduct) => {
     const isInCart = cartItems.some(
       (item: IProduct) => item._id === product._id
