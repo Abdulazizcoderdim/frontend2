@@ -94,10 +94,12 @@ const Wishlist = () => {
                       <div className="relative h-[270px] cursor-pointer rounded-md bg-[#F5F5F5] flex items-center justify-center">
                         <div className="h-44 w-44">
                           <img
-                            onClick={() => navigate(`/products/${product._id}`)}
-                            src={`${import.meta.env.VITE_PUBLIC_IMAGE_URL}/${
-                              product.imageUrl
-                            }`}
+                            onClick={() =>
+                              navigate(
+                                `/category/${product.category.slug}/${product.slug}`
+                              )
+                            }
+                            src={product.imageUrl}
                             className="object-contain h-full w-full"
                             alt="Product image"
                           />

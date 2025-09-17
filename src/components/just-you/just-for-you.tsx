@@ -1,4 +1,5 @@
 import { valueCount } from "@/hooks/useCountStar";
+import $axios from "@/http";
 import { cn } from "@/lib/utils";
 import { addItem, deleteItem } from "@/redux/cartSlice";
 import { IProduct } from "@/type";
@@ -23,27 +24,27 @@ const JustForYou = () => {
   const cartItems = useSelector((state: any) => state.cart.cart);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          import.meta.env.VITE_PUBLIC_API_URL + "/product/get-products"
-        );
-        if (!response.ok) {
-          throw new Error("Ma'lumotlarni olishda xatolik yuz berdi");
-        }
-        const data: IProduct[] = await response
-          .json()
-          .then((data) => data.reverse());
-        setTodayProduct(data);
-        setLoading(false);
-      } catch (error: any) {
-        console.log(error.message);
-        setLoading(false);
-      }
-    };
-
     fetchData();
   }, []);
+
+  const fetchData = async () => {
+    try {
+      setLoading(true);
+      const { data }: { data: { data: IProduct[] } } = await $axios.get(
+        "/products"
+      );
+
+      if (!data) {
+        throw new Error("Ma'lumotlarni olishda xatolik yuz berdi");
+      }
+
+      setTodayProduct(data.data);
+    } catch (error: any) {
+      console.log(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleCartToggle = (product: IProduct) => {
     const isInCart = cartItems.some(
@@ -89,6 +90,7 @@ const JustForYou = () => {
         className="min-h-[350px]"
       >
         {loading && <p>Loading...</p>}
+
         {todayProduct.map((product, i) => {
           const isInCart = cartItems.some(
             (item: IProduct) => item._id === product._id
@@ -100,7 +102,11 @@ const JustForYou = () => {
                 <div className="relative h-[270px] cursor-pointer rounded-md bg-[#F5F5F5] min-h-[250px] flex items-center justify-center">
                   <div className="h-44 w-44">
                     <img
-                      onClick={() => navigate(`/products/${product._id}`)}
+                      onClick={() =>
+                        navigate(
+                          `/category/${product.category.slug}/${product.slug}`
+                        )
+                      }
                       src={product.images[0]}
                       className="object-contain h-full w-full"
                       alt="Product image"

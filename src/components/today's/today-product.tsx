@@ -7,7 +7,6 @@ import "swiper/css/navigation";
 import { A11y, Autoplay, Navigation, Pagination } from "swiper/modules";
 import type { SwiperRef } from "swiper/react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import CountdownTimer from "../countdown-timer";
 import ProductItem from "../product-item/ProductItem";
 import ProductSkeleton from "../ProductSkeleton";
 import { Button } from "../ui/button";
@@ -32,7 +31,7 @@ const TodayProduct = ({
           <p className="text-black font-semibold md:text-4xl text-2xl">
             Flash Sales
           </p>
-          <CountdownTimer daysToCount={4} />
+          {/* <CountdownTimer daysToCount={4} /> */}
         </div>
         <div className="flex max-md:hidden items-center gap-2">
           <button

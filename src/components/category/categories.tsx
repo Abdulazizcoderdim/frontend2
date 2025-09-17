@@ -39,7 +39,7 @@ const Categories = () => {
   };
 
   return (
-    <div className="space-y-6 mt-20 border-b pb-20">
+    <div id="category" className="space-y-6 mt-20 border-b pb-20">
       <div className="flex items-center gap-3">
         <div className="w-[20px] h-[40px] rounded-md bg-red" />
         <p className="text-red font-semibold text-base">Categories</p>

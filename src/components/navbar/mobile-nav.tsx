@@ -5,35 +5,37 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from '@/components/ui/sheet';
-import { cn } from '@/lib/utils';
-import { getTotalWishListQuantity } from '@/redux/wishlistSlice';
-import { Menu, Search } from 'lucide-react';
-import { CiHeart } from 'react-icons/ci';
-import { PiShoppingCartThin } from 'react-icons/pi';
-import { useSelector } from 'react-redux';
-import { Link, useLocation } from 'react-router-dom';
-import { Button } from '../ui/button';
-import { navItems } from './items';
-import { getTotalCartQuantity } from '@/redux/cartSlice';
+} from "@/components/ui/sheet";
+import { cn } from "@/lib/utils";
+import { getTotalCartQuantity } from "@/redux/cartSlice";
+import { getTotalWishListQuantity } from "@/redux/wishlistSlice";
+import { Menu, Search } from "lucide-react";
+import { useState } from "react";
+import { CiHeart } from "react-icons/ci";
+import { PiShoppingCartThin } from "react-icons/pi";
+import { useSelector } from "react-redux";
+import { Link, useLocation } from "react-router-dom";
+import { Button } from "../ui/button";
+import { navItems } from "./items";
 
 const MobileNav = () => {
+  const [isOpen, setIsOpen] = useState(false);
   const { pathname } = useLocation();
   const totalWishListItems = useSelector(getTotalWishListQuantity);
   const totalItems = useSelector(getTotalCartQuantity);
 
   return (
-    <Sheet>
+    <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger>
-        <Button size={'icon'} variant={'ghost'}>
+        <Button size={"icon"} variant={"ghost"}>
           <Menu className="w-8 h-8" />
         </Button>
       </SheetTrigger>
-      <SheetContent side={'left'}>
+      <SheetContent side={"left"}>
         <SheetHeader>
           <SheetTitle>
             <h1 className="text-black text-2xl font-bold">
-              <Link to={'/'}>Exclusive</Link>
+              <Link to={"/"}>Exclusive</Link>
             </h1>
           </SheetTitle>
           <SheetDescription>
@@ -42,8 +44,8 @@ const MobileNav = () => {
                 const isActive = pathname === item.href;
                 return (
                   <Button
-                    className={cn('w-full', isActive && 'underline')}
-                    variant={'ghost'}
+                    className={cn("w-full", isActive && "underline")}
+                    variant={"ghost"}
                     key={i}
                     asChild
                   >
@@ -53,6 +55,20 @@ const MobileNav = () => {
                   </Button>
                 );
               })}
+              <Button
+                className="w-full text-base font-normal"
+                variant="ghost"
+                onClick={() => {
+                  setIsOpen(false);
+
+                  setTimeout(() => {
+                    const el = document.getElementById("category");
+                    if (el) el.scrollIntoView({ behavior: "smooth" });
+                  }, 300);
+                }}
+              >
+                Category
+              </Button>
             </div>
           </SheetDescription>
           <div className="flex items-center flex-col justify-start gap-5">
@@ -65,7 +81,7 @@ const MobileNav = () => {
               <Search className="text-black w-6 h-6" />
             </div>
             <div className="flex justify-start">
-              <Link to={'/wishList'}>
+              <Link to={"/wishList"}>
                 <span className="text-xl cursor-pointer relative hover:text-red transition duration-200">
                   <CiHeart className="w-8 h-8" />
 
@@ -76,7 +92,7 @@ const MobileNav = () => {
                   )}
                 </span>
               </Link>
-              <Link to={'/cart'}>
+              <Link to={"/cart"}>
                 <span className="text-xl cursor-pointer relative hover:text-red transition duration-200">
                   <PiShoppingCartThin className="w-8 h-8" />
 
