@@ -176,39 +176,45 @@ const GetOne = () => {
             <p className="text-2xl font-normal">
               ${Number(oneProduct?.price) * quantitry}.00
             </p>
-            <p className="font-normal text-sm">{oneProduct?.description}</p>
+            <p className="font-normal text-sm">
+              {oneProduct?.description && oneProduct?.description}
+            </p>
             <p className="h-0.5 w-full bg-zinc-600" />
-            <div className="flex items-center gap-5">
-              <p className="font-normal text-xl">Colours: </p>
-              <div className="flex items-center gap-1">
-                {oneProduct?.colours.map((item, i) => (
-                  <div
-                    key={i}
-                    onClick={() => setColor(item)}
-                    className={`bg-${item} cursor-pointer ${
-                      color === item && "border-blue-500 border-2"
-                    } border w-5 h-5 rounded-md`}
-                  />
-                ))}
+            {oneProduct?.colours && (
+              <div className="flex items-center gap-5">
+                <p className="font-normal text-xl">Colours: </p>
+                <div className="flex items-center gap-1">
+                  {oneProduct?.colours.map((item, i) => (
+                    <div
+                      key={i}
+                      onClick={() => setColor(item)}
+                      className={`bg-${item} cursor-pointer ${
+                        color === item && "border-blue-500 border-2"
+                      } border w-5 h-5 rounded-md`}
+                    />
+                  ))}
+                </div>
               </div>
-            </div>
-            <div className="flex items-center gap-5">
-              <p className="font-normal text-xl">Size: </p>
-              <div className="flex items-center gap-3">
-                {oneProduct?.sizes.map((item, i) => (
-                  <button
-                    key={i}
-                    className={cn(
-                      "border rounded-md w-8 h-8 flex items-center justify-center text-sm font-medium",
-                      sizes === item && "bg-red text-white"
-                    )}
-                    onClick={() => setSizes(item)}
-                  >
-                    {item}
-                  </button>
-                ))}
+            )}
+            {oneProduct?.sizes && (
+              <div className="flex items-center gap-5">
+                <p className="font-normal text-xl">Size: </p>
+                <div className="flex items-center gap-3">
+                  {oneProduct?.sizes.map((item, i) => (
+                    <button
+                      key={i}
+                      className={cn(
+                        "border rounded-md w-8 h-8 flex items-center justify-center text-sm font-medium",
+                        sizes === item && "bg-red text-white"
+                      )}
+                      onClick={() => setSizes(item)}
+                    >
+                      {item}
+                    </button>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
 
             <div className="flex items-center gap-2 pb-5">
               <div className="border rounded-md w-40 h-11 flex items-center justify-between">
