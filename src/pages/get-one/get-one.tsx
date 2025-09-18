@@ -128,14 +128,12 @@ const GetOne = () => {
                 </div>
               )}
 
-              <div className="h-full w-full p-5 rounded-md bg-[#F5F5F5]">
-                <div className="sm:h-[550px] h-72">
-                  <img
-                    src={image}
-                    className="object-contain h-full w-full"
-                    alt={oneProduct?.title || ""}
-                  />
-                </div>
+              <div className="w-full p-5 rounded-md sm:h-[500px] bg-[#F5F5F5]">
+                <img
+                  src={image}
+                  className="object-contain h-full w-full"
+                  alt={oneProduct?.title || ""}
+                />
               </div>
             </div>
           ) : (
@@ -176,13 +174,13 @@ const GetOne = () => {
               </p>
             </div>
             <p className="text-2xl font-normal">
-              ${Number(oneProduct?.price) * quantitry}.00
+              {Number(oneProduct?.price) * quantitry}.00 UZS
             </p>
             <p className="font-normal text-sm">
               {oneProduct?.description && oneProduct?.description}
             </p>
             <p className="h-0.5 w-full bg-zinc-600" />
-            {oneProduct?.colours && (
+            {oneProduct?.colours && oneProduct?.colours.length > 0 && (
               <div className="flex items-center gap-5">
                 <p className="font-normal text-xl">Colours: </p>
                 <div className="flex items-center gap-1">
@@ -198,7 +196,7 @@ const GetOne = () => {
                 </div>
               </div>
             )}
-            {oneProduct?.sizes && (
+            {oneProduct?.sizes && oneProduct?.sizes.length > 0 && (
               <div className="flex items-center gap-5">
                 <p className="font-normal text-xl">Size: </p>
                 <div className="flex items-center gap-3">
