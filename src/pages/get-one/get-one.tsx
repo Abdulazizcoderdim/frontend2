@@ -107,24 +107,26 @@ const GetOne = () => {
         <div className="flex max-md:flex-col justify-between gap-5 min-h-[580px]">
           {loading ? (
             <div className="flex max-md:flex-col w-full gap-10">
-              <div className="md:max-w-[170px] w-full flex md:flex-col gap-4">
-                {oneProduct?.images.map((item, i) => (
-                  <div
-                    key={i}
-                    onClick={() => setImage(item)}
-                    className={cn(
-                      "bg-[#F5F5F5] cursor-pointer border-blue-500 hover:border-2 sm:h-[138px] h-[70px] flex items-center justify-center p-3 rounded-md",
-                      item === image && "border-2"
-                    )}
-                  >
-                    <img
-                      className="object-contain h-full w-full"
-                      src={item}
-                      alt={oneProduct?.title || ""}
-                    />
-                  </div>
-                ))}
-              </div>
+              {oneProduct?.images && oneProduct?.images.length > 1 && (
+                <div className="md:max-w-[170px] w-full flex md:flex-col gap-4">
+                  {oneProduct?.images.map((item, i) => (
+                    <div
+                      key={i}
+                      onClick={() => setImage(item)}
+                      className={cn(
+                        "bg-[#F5F5F5] cursor-pointer border-blue-500 hover:border-2 sm:h-[138px] h-[70px] flex items-center justify-center p-3 rounded-md",
+                        item === image && "border-2"
+                      )}
+                    >
+                      <img
+                        className="object-contain h-full w-full"
+                        src={item}
+                        alt={oneProduct?.title || ""}
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
 
               <div className="h-full w-full p-5 rounded-md bg-[#F5F5F5]">
                 <div className="sm:h-[550px] h-72">
