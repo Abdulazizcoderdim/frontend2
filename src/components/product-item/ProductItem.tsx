@@ -1,3 +1,4 @@
+import { formatPrice } from "@/hooks/formatPrice";
 import { valueCount } from "@/hooks/useCountStar";
 import { cn } from "@/lib/utils";
 import { addItem, deleteItem } from "@/redux/cartSlice";
@@ -116,10 +117,12 @@ const ProductItem = ({ product }: { product: IProduct }) => {
       </div>
       <p className="font-medium text-base">{product.title}</p>
       <div className="space-x-3">
-        <span className="font-medium text-base text-red">${product.price}</span>
+        <span className="font-medium text-base text-red">
+          {formatPrice(product.price)}
+        </span>
         {product.oldPrice && (
           <span className="line-through font-medium text-base text-zinc-600">
-            ${product.oldPrice}
+            {formatPrice(product.oldPrice)}
           </span>
         )}
       </div>

@@ -1,6 +1,7 @@
 import MaxWidth from "@/components/max-width";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
+import { formatPrice } from "@/hooks/formatPrice";
 import { valueCount } from "@/hooks/useCountStar";
 import $axios from "@/http";
 import { cn } from "@/lib/utils";
@@ -174,7 +175,7 @@ const GetOne = () => {
               </p>
             </div>
             <p className="text-2xl font-normal">
-              {Number(oneProduct?.price) * quantitry}.00 UZS
+              {formatPrice(Number(oneProduct?.price) * quantitry)}
             </p>
             <p className="font-normal text-sm">
               {oneProduct?.description && oneProduct?.description}
@@ -249,7 +250,13 @@ const GetOne = () => {
                 )}
               </Button>
             </div>
-            <div className="space-y-3 border-2 border-zinc-600 rounded-md">
+            <div
+              className={cn(
+                "space-y-3 rounded-md",
+                oneProduct?.deliveryOptions.freeDelivery &&
+                  "border-2 border-zinc-600"
+              )}
+            >
               {oneProduct?.deliveryOptions.freeDelivery && (
                 <div className="p-2 flex items-center gap-2">
                   <img src="/id.png" className="w-10 h-10" alt="" />
@@ -261,7 +268,12 @@ const GetOne = () => {
                   </div>
                 </div>
               )}
-              <p className="h-0.5 w-full bg-zinc-600" />
+              <p
+                className={cn(
+                  oneProduct?.deliveryOptions.returnDelivery &&
+                    "h-0.5 w-full bg-zinc-600"
+                )}
+              />
               {oneProduct?.deliveryOptions.returnDelivery && (
                 <div className="p-2 flex items-center gap-2">
                   <img src="/id2.png" className="w-10 h-10" alt="" />
