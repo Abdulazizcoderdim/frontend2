@@ -1,4 +1,5 @@
 import { IUser } from "@/interfaces";
+import { t } from "@/lib/translate";
 import { registerSchema } from "@/lib/validation";
 import { registerUser } from "@/service/user";
 import { authStore } from "@/store/auth.store";
@@ -46,26 +47,39 @@ const SignUp = () => {
 
   return (
     <div className="py-14 max-sm:px-5 mb-10 flex items-center max-md:justify-center md:justify-between">
+      {/* Left image */}
       <div className="md:w-1/2 max-md:hidden">
         <img className="w-full h-full object-cover" src="/sign-up.png" alt="" />
       </div>
+
+      {/* Right form */}
       <div className="md:w-1/2 flex justify-center">
         <form
           onSubmit={form.handleSubmit(onSubmit)}
           className="flex md:max-w-sm space-y-5 w-full flex-col text-center"
         >
           <h1 className="font-medium sm:text-4xl text-3xl w-fit">
-            Create an account
+            {t({
+              uz: "Hisob yaratish",
+              ru: "Создать аккаунт",
+              en: "Create an account",
+            })}
           </h1>
           <p className="font-normal text-base w-fit">
-            Enter your details below
+            {t({
+              uz: "Quyidagi ma'lumotlarni kiriting",
+              ru: "Введите свои данные ниже",
+              en: "Enter your details below",
+            })}
           </p>
+
+          {/* Username */}
           <div>
             <input
               {...form.register("username")}
               className="border-b-2 w-full border-zinc-300 placeholder:text-zinc-400 pb-2 outline-none bg-transparent"
               type="text"
-              placeholder="Name"
+              placeholder={t({ uz: "Ism", ru: "Имя", en: "Name" })}
             />
             {form.formState.errors.username && (
               <span className="text-red flex text-start text-xs">
@@ -73,12 +87,14 @@ const SignUp = () => {
               </span>
             )}
           </div>
+
+          {/* Email */}
           <div>
             <input
               {...form.register("email")}
               className="border-b-2 w-full border-zinc-300 placeholder:text-zinc-400 pb-2 outline-none bg-transparent"
               type="text"
-              placeholder="Email"
+              placeholder={t({ uz: "Email", ru: "Эл. почта", en: "Email" })}
             />
             {form.formState.errors.email && (
               <span className="text-red flex text-start text-xs">
@@ -86,12 +102,14 @@ const SignUp = () => {
               </span>
             )}
           </div>
+
+          {/* Password */}
           <div>
             <input
               {...form.register("password")}
               className="border-b-2 w-full border-zinc-300 placeholder:text-zinc-400 pb-2 outline-none bg-transparent"
               type="password"
-              placeholder="Password"
+              placeholder={t({ uz: "Parol", ru: "Пароль", en: "Password" })}
             />
             {form.formState.errors.password && (
               <span className="text-red flex text-start text-xs">
@@ -100,18 +118,31 @@ const SignUp = () => {
             )}
           </div>
 
+          {/* Submit */}
           <Button
             disabled={loading}
             type="submit"
             variant={"destructive"}
             size={"lg"}
           >
-            {loading ? "Loading..." : "Create Account"}
+            {loading
+              ? t({ uz: "Yuklanmoqda...", ru: "Загрузка...", en: "Loading..." })
+              : t({
+                  uz: "Hisob yaratish",
+                  ru: "Создать аккаунт",
+                  en: "Create Account",
+                })}
           </Button>
+
+          {/* Login link */}
           <p className="flex items-center justify-center w-full gap-3">
-            Already have an account?
+            {t({
+              uz: "Allaqachon hisobingiz bormi?",
+              ru: "Уже есть аккаунт?",
+              en: "Already have an account?",
+            })}
             <Link to={"/login"} className="underline">
-              Log in
+              {t({ uz: "Kirish", ru: "Войти", en: "Log in" })}
             </Link>
           </p>
         </form>

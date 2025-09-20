@@ -6,6 +6,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { formatPrice } from "@/hooks/formatPrice";
+import { t } from "@/lib/translate";
 import {
   clearCart,
   deleteItem,
@@ -55,10 +57,20 @@ const TableCart = () => {
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>Product</TableHead>
-            <TableHead>Price</TableHead>
-            <TableHead>Quantity</TableHead>
-            <TableHead className="text-right">Subtotal</TableHead>
+            <TableHead>
+              {t({ uz: "Mahsulot", ru: "Продукт", en: "Product" })}
+            </TableHead>
+            <TableHead>{t({ uz: "Narx", ru: "Цена", en: "Price" })}</TableHead>
+            <TableHead>
+              {t({ uz: "Soni", ru: "Количество", en: "Quantity" })}
+            </TableHead>
+            <TableHead className="text-right">
+              {t({
+                uz: "Oraliq summa",
+                ru: "Промежуточная сумма",
+                en: "Subtotal",
+              })}
+            </TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -80,7 +92,7 @@ const TableCart = () => {
                   />
                 </div>
               </TableCell>
-              <TableCell>${item.price}</TableCell>
+              <TableCell>{formatPrice(item.price)}</TableCell>
               <TableCell>
                 <input
                   type="number"
@@ -95,65 +107,117 @@ const TableCart = () => {
                 />
               </TableCell>
               <TableCell className="text-right">
-                ${(item.price * item.quantity).toFixed(2)}
+                {formatPrice(item.price * item.quantity)}
               </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
+
       <div className="flex justify-between gap-5 mt-5">
         <Button asChild variant={"outline"} size={"lg"}>
-          <Link to={"/"}>Return To Shop</Link>
+          <Link to={"/"}>
+            {t({
+              uz: "Do‘konga qaytish",
+              ru: "Вернуться в магазин",
+              en: "Return To Shop",
+            })}
+          </Link>
         </Button>
         <Button
           onClick={() => dispatch(clearCart())}
           variant={"outline"}
           size={"lg"}
         >
-          Update Cart
+          {t({
+            uz: "Savatchani yangilash",
+            ru: "Обновить корзину",
+            en: "Update Cart",
+          })}
         </Button>
       </div>
+
       <div className="flex justify-between max-md:flex-col gap-5 pb-10 mt-20">
         <div className="flex h-fit items-center gap-3">
-          <Input placeholder="Coupon Code" />
-          <Button variant="destructive">Apply Coupon</Button>
+          <Input
+            placeholder={t({
+              uz: "Kupon kodi",
+              ru: "Код купона",
+              en: "Coupon Code",
+            })}
+          />
+          <Button variant="destructive">
+            {t({
+              uz: "Kuponni qo‘llash",
+              ru: "Применить купон",
+              en: "Apply Coupon",
+            })}
+          </Button>
         </div>
         <div className="border space-y-4 rounded-md border-black p-5 md:max-w-[470px] w-full">
-          <h3 className="font-medium text-xl">Cart Total</h3>
+          <h3 className="font-medium text-xl">
+            {t({
+              uz: "Savatcha jami",
+              ru: "Итого в корзине",
+              en: "Cart Total",
+            })}
+          </h3>
           <p className="flex justify-between items-center border-b pb-2">
-            <span>Subtotal:</span>
             <span>
-              $
-              {localCart.reduce(
-                (acc, item) => acc + item.price * item.quantity,
-                0
+              {t({
+                uz: "Oraliq summa:",
+                ru: "Промежуточная сумма:",
+                en: "Subtotal:",
+              })}
+            </span>
+            <span>
+              {formatPrice(
+                localCart.reduce(
+                  (acc, item) => acc + item.price * item.quantity,
+                  0
+                )
               )}
             </span>
           </p>
           <p className="flex justify-between items-center border-b pb-2">
-            <span>Shipping:</span>
-            <span>Free</span>
+            <span>
+              {t({ uz: "Yetkazib berish:", ru: "Доставка:", en: "Shipping:" })}
+            </span>
+            <span>{t({ uz: "Bepul", ru: "Бесплатно", en: "Free" })}</span>
           </p>
           <p className="flex justify-between items-center">
-            <span>Total:</span>
+            <span>{t({ uz: "Jami:", ru: "Итого:", en: "Total:" })}</span>
             <span>
-              $
-              {localCart.reduce(
-                (acc, item) => acc + item.price * item.quantity,
-                0
+              {formatPrice(
+                localCart.reduce(
+                  (acc, item) => acc + item.price * item.quantity,
+                  0
+                )
               )}
             </span>
           </p>
           <div className="flex justify-center">
             <Button asChild variant={"destructive"}>
-              <Link to={"/checkout"}>Procees to checkout</Link>
+              <Link to={"/checkout"}>
+                {t({
+                  uz: "To‘lovga o‘tish",
+                  ru: "Перейти к оформлению",
+                  en: "Proceed to checkout",
+                })}
+              </Link>
             </Button>
           </div>
         </div>
       </div>
     </div>
   ) : (
-    <p className="text-center">Cart empty</p>
+    <p className="text-center">
+      {t({
+        uz: "Savatcha bo‘sh",
+        ru: "Корзина пуста",
+        en: "Cart Empty",
+      })}
+    </p>
   );
 };
 

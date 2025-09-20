@@ -4,6 +4,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { formatPrice } from "@/hooks/formatPrice";
 import { valueCount } from "@/hooks/useCountStar";
 import $axios from "@/http";
+import { t } from "@/lib/translate";
 import { cn } from "@/lib/utils";
 import { addToWishList, deleteWishList } from "@/redux/wishlistSlice";
 import { IProduct } from "@/type";
@@ -167,10 +168,20 @@ const GetOne = () => {
               <p>
                 {oneProduct?.stockStatus ? (
                   <span className="text-sm text-[#00FF66] font-normal">
-                    In Stock
+                    {t({
+                      uz: "Sotuvda mavjud",
+                      ru: "В наличии",
+                      en: "In Stock",
+                    })}
                   </span>
                 ) : (
-                  <span className="text-sm font-normal">Out of Stock</span>
+                  <span className="text-sm font-normal">
+                    {t({
+                      uz: "Sotuvda yo‘q",
+                      ru: "Нет в наличии",
+                      en: "Out of Stock",
+                    })}
+                  </span>
                 )}
               </p>
             </div>
@@ -183,7 +194,14 @@ const GetOne = () => {
             <p className="h-0.5 w-full bg-zinc-600" />
             {oneProduct?.colours && oneProduct?.colours.length > 0 && (
               <div className="flex items-center gap-5">
-                <p className="font-normal text-xl">Colours: </p>
+                <p className="font-normal text-xl">
+                  {t({
+                    uz: "Ranglar",
+                    ru: "Цвета",
+                    en: "Colours",
+                  })}
+                  :{" "}
+                </p>
                 <div className="flex items-center gap-1">
                   {oneProduct?.colours.map((item, i) => (
                     <div
@@ -199,7 +217,14 @@ const GetOne = () => {
             )}
             {oneProduct?.sizes && oneProduct?.sizes.length > 0 && (
               <div className="flex items-center gap-5">
-                <p className="font-normal text-xl">Size: </p>
+                <p className="font-normal text-xl">
+                  {t({
+                    uz: "O‘lcham",
+                    ru: "Размер",
+                    en: "Size",
+                  })}
+                  :{" "}
+                </p>
                 <div className="flex items-center gap-3">
                   {oneProduct?.sizes.map((item, i) => (
                     <button
@@ -236,7 +261,13 @@ const GetOne = () => {
                 </button>
               </div>
               <Button asChild size={"lg"} variant={"destructive"}>
-                <Link to={`/checkout/${oneProduct?.slug}`}>Buy Now</Link>
+                <Link to={`/checkout/${oneProduct?.slug}`}>
+                  {t({
+                    uz: "Hozir sotib olish",
+                    ru: "Купить сейчас",
+                    en: "Buy Now",
+                  })}
+                </Link>
               </Button>
               <Button
                 onClick={() => handleWishListToggle()}
@@ -261,9 +292,19 @@ const GetOne = () => {
                 <div className="p-2 flex items-center gap-2">
                   <img src="/id.png" className="w-10 h-10" alt="" />
                   <div className="flex flex-col gap-3">
-                    <p className="font-medium text-base">Free Delivery</p>
+                    <p className="font-medium text-base">
+                      {t({
+                        uz: "Bepul yetkazib berish",
+                        ru: "Бесплатная доставка",
+                        en: "Free Delivery",
+                      })}
+                    </p>
                     <Link className="font-medium text-xs underline" to={"#"}>
-                      Enter your postal code for Delivery Availability
+                      {t({
+                        uz: "Yetkazib berish mavjudligini bilish uchun pochta indeksingizni kiriting",
+                        ru: "Введите почтовый индекс для проверки доступности доставки",
+                        en: "Enter your postal code for Delivery Availability",
+                      })}
                     </Link>
                   </div>
                 </div>
@@ -278,10 +319,27 @@ const GetOne = () => {
                 <div className="p-2 flex items-center gap-2">
                   <img src="/id2.png" className="w-10 h-10" alt="" />
                   <div className="flex flex-col gap-3">
-                    <p className="font-medium text-base">Return Delivery</p>
+                    <p className="font-medium text-base">
+                      {t({
+                        uz: "Qaytarib yuborish xizmati",
+                        ru: "Обратная доставка",
+                        en: "Return Delivery",
+                      })}
+                    </p>
                     <Link className="font-medium text-xs " to={"#"}>
-                      Free 30 Days Delivery Returns.
-                      <span className="underline">Details</span>
+                      {t({
+                        uz: "30 kun davomida bepul qaytarib berish xizmati",
+                        ru: "Бесплатный возврат в течение 30 дней",
+                        en: "Free 30 Days Delivery Returns",
+                      })}
+
+                      <span className="underline">
+                        {t({
+                          uz: "Batafsil",
+                          ru: "Детали",
+                          en: "Details",
+                        })}
+                      </span>
                     </Link>
                   </div>
                 </div>

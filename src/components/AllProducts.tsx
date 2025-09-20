@@ -1,4 +1,5 @@
 import $axios from "@/http";
+import { t } from "@/lib/translate";
 import { IPagination, IProduct } from "@/type";
 import { useEffect, useState } from "react";
 import MaxWidth from "./max-width";
@@ -60,7 +61,11 @@ const AllProducts = () => {
             type="button"
             onClick={() => handlePageChange(pagination.page + 1)}
           >
-            More Products
+            {t({
+              uz: "Ko‘proq mahsulotlar",
+              ru: "Больше товаров",
+              en: "More Products",
+            })}
           </Button>
         </div>
       )}

@@ -1,7 +1,9 @@
+import { t } from "@/lib/translate";
 import { cn } from "@/lib/utils";
 import { getTotalCartQuantity } from "@/redux/cartSlice";
 import { getTotalWishListQuantity } from "@/redux/wishlistSlice";
 import { authStore } from "@/store/auth.store";
+import { useLangStore } from "@/store/languageStore";
 import { Search } from "lucide-react";
 import { CiHeart } from "react-icons/ci";
 import { PiShoppingCartThin } from "react-icons/pi";
@@ -19,6 +21,7 @@ const Navbar = () => {
   const totalItems = useSelector(getTotalCartQuantity);
   const totalWishListItems = useSelector(getTotalWishListQuantity);
   const { isAuth, isLoading } = authStore();
+  const { lang, setLang } = useLangStore();
 
   return (
     <header className="">
@@ -33,12 +36,19 @@ const Navbar = () => {
           <select
             name="language"
             title="Language"
-            defaultValue={"English"}
+            value={lang}
+            onChange={(e) => setLang(e.target.value as "uz" | "ru" | "en")}
             className="text-white w-fit items-start bg-transparent font-normal text-sm"
           >
-            <option className="bg-black text-white">English</option>
-            <option className="bg-black text-white">French</option>
-            <option className="bg-black text-white">Spanish</option>
+            <option value="en" className="bg-black text-white">
+              English
+            </option>
+            <option value="uz" className="bg-black text-white">
+              Uzbek
+            </option>
+            <option value="ru" className="bg-black text-white">
+              Russian
+            </option>
           </select>
         </MaxWidth>
       </div>
@@ -49,7 +59,7 @@ const Navbar = () => {
             <Link to={"/"}>Exclusive</Link>
           </h1>
           <div className="flex max-[805px]:hidden items-center gap-5">
-            {navItems.map((item, i) => {
+            {navItems[lang].map((item, i) => {
               const isActive = pathname === item.href;
               if (
                 localStorage.getItem("accessToken") &&
@@ -75,7 +85,11 @@ const Navbar = () => {
             <div className="flex gap-7 justify-between items-center px-4 py-2 rounded-md bg-[#F5F5F5] text-zinc-400">
               <input
                 type="text"
-                placeholder="What are you looking for?"
+                placeholder={t({
+                  uz: "Nimani qidiryapsiz?",
+                  ru: "Что Вы ищете?",
+                  en: "What are you looking for?",
+                })}
                 className="border-none outline-none bg-transparent"
               />
               <Search className="text-black w-6 h-6" />

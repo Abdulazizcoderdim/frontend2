@@ -1,5 +1,6 @@
 import { formatPrice } from "@/hooks/formatPrice";
 import { valueCount } from "@/hooks/useCountStar";
+import { t } from "@/lib/translate";
 import { cn } from "@/lib/utils";
 import { addItem, deleteItem } from "@/redux/cartSlice";
 import { addToWishList, deleteWishList } from "@/redux/wishlistSlice";
@@ -103,14 +104,36 @@ const ProductItem = ({ product }: { product: IProduct }) => {
         <div className="flex items-center gap-3 absolute scale-0 group-hover:scale-100 transition-all duration-300 rounded-b-md cursor-pointer bottom-0 right-0 left-0">
           <button
             onClick={() => handleCartToggle(product)}
-            title={isInCart ? "Remove from cart" : "Add to cart"}
+            title={
+              isInCart
+                ? t({
+                    uz: "Savatchadan olib tashlash",
+                    ru: "Удалить из корзины",
+                    en: "Remove from cart",
+                  })
+                : t({
+                    uz: "Savatchaga qo‘shish",
+                    ru: "Добавить в корзину",
+                    en: "Add to cart",
+                  })
+            }
             className={cn(
               "rounded-md w-full bg-black text-white text-center py-2",
               isInCart ? "bg-transparent border border-red text-red" : ""
             )}
           >
             <p className="text-center font-medium text-base">
-              {isInCart ? "Remove from Cart" : "Add To Cart"}
+              {isInCart
+                ? t({
+                    uz: "Savatchadan olib tashlash",
+                    ru: "Удалить из корзины",
+                    en: "Remove from Cart",
+                  })
+                : t({
+                    uz: "Savatchaga qo‘shish",
+                    ru: "Добавить в корзину",
+                    en: "Add To Cart",
+                  })}
             </p>
           </button>
         </div>

@@ -1,23 +1,25 @@
 import { Instagram, Linkedin, Twitter } from "lucide-react";
 
-export const aboutItem = [
-  {
-    count: "10.5k",
-    title: "Sallers active our site",
-  },
-  {
-    count: "33k",
-    title: "Mopnthly Produduct Sale",
-  },
-  {
-    count: "45.5k",
-    title: "Customer active in our site",
-  },
-  {
-    count: "25k",
-    title: "Anual gross sale in our site",
-  },
-];
+export const aboutItem = {
+  uz: [
+    { count: "10.5k", title: "Saytimizda faol sotuvchilar" },
+    { count: "33k", title: "Oylik mahsulot sotuvi" },
+    { count: "45.5k", title: "Saytimizda faol mijozlar" },
+    { count: "25k", title: "Yillik umumiy sotuv hajmi" },
+  ],
+  ru: [
+    { count: "10.5k", title: "Активные продавцы на нашем сайте" },
+    { count: "33k", title: "Ежемесячные продажи товаров" },
+    { count: "45.5k", title: "Активные клиенты на нашем сайте" },
+    { count: "25k", title: "Годовой общий объем продаж" },
+  ],
+  en: [
+    { count: "10.5k", title: "Sellers active on our site" },
+    { count: "33k", title: "Monthly product sales" },
+    { count: "45.5k", title: "Customers active on our site" },
+    { count: "25k", title: "Annual gross sales on our site" },
+  ],
+};
 
 export const personItems = [
   {

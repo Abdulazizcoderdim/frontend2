@@ -1,4 +1,5 @@
 import $axios from "@/http";
+import { t } from "@/lib/translate";
 import { ICategory } from "@/type";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
@@ -42,12 +43,22 @@ const Categories = () => {
     <div id="category" className="space-y-6 mt-20 border-b pb-20">
       <div className="flex items-center gap-3">
         <div className="w-[20px] h-[40px] rounded-md bg-red" />
-        <p className="text-red font-semibold text-base">Categories</p>
+        <p className="text-red font-semibold text-base">
+          {t({
+            uz: "Kategoriyalar",
+            ru: "Категории",
+            en: "Categories",
+          })}
+        </p>
       </div>
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-28">
           <p className="text-black font-semibold sm:text-4xl text-2xl">
-            Browse By Category
+            {t({
+              uz: "Kategoriyalar bo‘yicha ko‘rish",
+              ru: "Просмотр по категориям",
+              en: "Browse By Category",
+            })}
           </p>
         </div>
         <div className="flex items-center gap-2">

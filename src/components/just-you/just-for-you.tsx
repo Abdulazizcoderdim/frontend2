@@ -1,5 +1,7 @@
+import { formatPrice } from "@/hooks/formatPrice";
 import { valueCount } from "@/hooks/useCountStar";
 import $axios from "@/http";
+import { t } from "@/lib/translate";
 import { cn } from "@/lib/utils";
 import { addItem, deleteItem } from "@/redux/cartSlice";
 import { IProduct } from "@/type";
@@ -73,11 +75,21 @@ const JustForYou = () => {
       <div className="flex items-center justify-between gap-2 pb-16">
         <div className="flex items-center gap-3">
           <div className="w-[20px] h-[40px] rounded-md bg-red" />
-          <p className="text-red font-semibold text-base">Just For You</p>
+          <p className="text-red font-semibold text-base">
+            {t({
+              uz: "Faqat Siz uchun",
+              ru: "Только для вас",
+              en: "Just For You",
+            })}
+          </p>
         </div>
 
         <Button size={"lg"} variant={"outline"}>
-          See All
+          {t({
+            uz: "Hammasini ko‘rish",
+            ru: "Посмотреть все",
+            en: "See All",
+          })}
         </Button>
       </div>
       <Swiper
@@ -132,7 +144,11 @@ const JustForYou = () => {
                       ) : (
                         <span className="flex items-center gap-2">
                           <PiShoppingCartThin className="w-8 h-8" />
-                          Add To Cart
+                          {t({
+                            uz: "Savatchaga qo‘shish",
+                            ru: "Добавить в корзину",
+                            en: "Add To Cart",
+                          })}
                         </span>
                       )}
                     </p>
@@ -141,11 +157,13 @@ const JustForYou = () => {
                 <p className="font-medium text-base">{product.title}</p>
                 <div className="space-x-3">
                   <span className="font-medium text-base text-red">
-                    ${product.price}
+                    {formatPrice(product.price)}
                   </span>
-                  <span className="line-through font-medium text-base text-zinc-600">
-                    ${product.oldPrice}
-                  </span>
+                  {product.oldPrice && (
+                    <span className="line-through font-medium text-base text-zinc-600">
+                      {formatPrice(product.oldPrice)}
+                    </span>
+                  )}
                 </div>
                 <div className="flex items-center gap-2">
                   {Array.from(

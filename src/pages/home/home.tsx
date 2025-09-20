@@ -8,6 +8,7 @@ import TodayProduct from "@/components/today's/today-product";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import $axios from "@/http";
+import { t } from "@/lib/translate";
 import { ICategory, IProduct } from "@/type";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -104,16 +105,28 @@ const Home = () => {
         <div className="flex justify-between items-center">
           <div className="sm:w-1/2 z-10 sm:space-y-8 space-y-5">
             <h3 className="font-semibold text-base text-[#00FF66]">
-              Categories
+              {t({
+                uz: "Kategoriyalar",
+                ru: "Категории",
+                en: "Categories",
+              })}
             </h3>
             <p className="font-semibold md:text-5xl sm:text-3xl text-xl text-white">
-              Enhance Your Music Experience
+              {t({
+                uz: "Musiqa tajribangizni yaxshilang",
+                ru: "Улучшите свои музыкальные впечатления",
+                en: "Enhance Your Music Experience",
+              })}
             </p>
             <div className="flex items-center">
               <TimeCategories daysToCount={4} />
             </div>
             <Button variant={"ghost"} className="bg-[#00FF66] text-white px-7">
-              Buy Now!
+              {t({
+                uz: "Hozir xarid qilish!",
+                ru: "Купить сейчас!",
+                en: "Buy Now!",
+              })}
             </Button>
           </div>
           <div className="sm:w-1/2 max-sm:absolute ">
@@ -133,27 +146,53 @@ const Home = () => {
           <div className="flex flex-col gap-2 text-center justify-center">
             <img className="w-20 h-20 mx-auto" src="/icon1.png" alt="" />
             <p className="font-semibold md:text-xl text-base">
-              FREE AND FAST DELIVERY
+              {t({
+                uz: "Tez va bepul yetkazib berish",
+                ru: "Бесплатная и быстрая доставка",
+                en: "FREE AND FAST DELIVERY",
+              })}
             </p>
             <p className="font-normal text-sm">
-              Free delivery for all orders over $140
+              {t({
+                uz: "140$ dan yuqori barcha buyurtmalar uchun bepul yetkazib berish",
+                ru: "Бесплатная доставка для всех заказов свыше 140$",
+                en: "Free delivery for all orders over $140",
+              })}
             </p>
           </div>
           <div className="flex flex-col gap-2 text-center justify-center">
             <img className="w-20 h-20 mx-auto" src="/icon2.png" alt="" />
             <p className="font-semibold md:text-xl text-base">
-              24/7 CUSTOMER SERVICE
+              {t({
+                uz: "24/7 mijozlarga xizmat ko‘rsatish",
+                ru: "Круглосуточная служба поддержки",
+                en: "24/7 CUSTOMER SERVICE",
+              })}
             </p>
             <p className="font-normal text-sm">
-              Friendly 24/7 customer support
+              {t({
+                uz: "Do‘stona 24/7 mijozlarni qo‘llab-quvvatlash",
+                ru: "Дружелюбная круглосуточная поддержка клиентов",
+                en: "Friendly 24/7 customer support",
+              })}
             </p>
           </div>
           <div className="flex flex-col gap-2 text-center justify-center">
             <img className="w-20 h-20 mx-auto" src="/icon3.png" alt="" />
             <p className="font-semibold md:text-xl text-base">
-              MONEY BACK GUARANTEE
+              {t({
+                uz: "Pulni qaytarish kafolati",
+                ru: "Гарантия возврата денег",
+                en: "MONEY BACK GUARANTEE",
+              })}
             </p>
-            <p className="font-normal text-sm">We reurn money within 30 days</p>
+            <p className="font-normal text-sm">
+              {t({
+                uz: "Biz 30 kun ichida pulni qaytaramiz",
+                ru: "Мы возвращаем деньги в течение 30 дней",
+                en: "We return money within 30 days",
+              })}
+            </p>
           </div>
         </div>
       </div>

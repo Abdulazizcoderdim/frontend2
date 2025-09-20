@@ -1,3 +1,4 @@
+import { t } from "@/lib/translate";
 import { IProduct } from "@/type";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useRef } from "react";
@@ -24,12 +25,22 @@ const OurProducts = ({
     <div className="space-y-6 mt-20">
       <div className="flex items-center gap-3">
         <div className="w-[20px] h-[40px] rounded-md bg-red" />
-        <p className="text-red font-semibold text-base">Our Products</p>
+        <p className="text-red font-semibold text-base">
+          {t({
+            uz: "Bizning mahsulotlarimiz",
+            ru: "Наши продукты",
+            en: "Our Products",
+          })}
+        </p>
       </div>
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-28">
           <p className="text-black font-semibold md:text-4xl sm:text-2xl text-xl">
-            Explore Our Products
+            {t({
+              uz: "Mahsulotlarimizni ko‘rib chiqing",
+              ru: "Изучите наши продукты",
+              en: "Explore Our Products",
+            })}
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -90,7 +101,13 @@ const OurProducts = ({
           variant={"destructive"}
           className="font-medium text-base"
         >
-          <Link to="/shop">View All Products</Link>
+          <Link to="/shop">
+            {t({
+              uz: "Ko'proq mahsulotlar",
+              ru: "Посмотреть все продукты",
+              en: "View All Products",
+            })}
+          </Link>
         </Button>
       </div>
     </div>

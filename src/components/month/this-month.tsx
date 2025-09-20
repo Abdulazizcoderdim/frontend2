@@ -1,3 +1,4 @@
+import { t } from "@/lib/translate";
 import { IProduct } from "@/type";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -18,17 +19,31 @@ const ThisMonth = ({
     <div className="space-y-10 mt-20">
       <div className="flex items-center gap-3">
         <div className="w-[20px] h-[40px] rounded-md bg-red" />
-        <p className="text-red font-semibold text-base">This Month</p>
+        <p className="text-red font-semibold text-base">
+          {t({
+            uz: "Ushbu oy",
+            ru: "В этом месяце",
+            en: "This Month",
+          })}
+        </p>
       </div>
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-28">
           <p className="text-black font-semibold sm:text-4xl text-2xl">
-            Best Selling Products
+            {t({
+              uz: "Eng ko‘p sotilgan mahsulotlar",
+              ru: "Самые продаваемые товары",
+              en: "Best Selling Products",
+            })}
           </p>
         </div>
         <div className="flex items-center gap-2">
           <Button variant={"destructive"} className="font-medium text-base">
-            View All
+            {t({
+              uz: "Hammasini ko‘rish",
+              ru: "Посмотреть все",
+              en: "View All",
+            })}
           </Button>
         </div>
       </div>

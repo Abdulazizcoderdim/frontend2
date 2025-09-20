@@ -1,6 +1,8 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { formatPrice } from "@/hooks/formatPrice";
 import $axios from "@/http";
+import { t } from "@/lib/translate";
 import { billingSchema } from "@/lib/validation";
 import { IProduct } from "@/type";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -98,26 +100,36 @@ const BuyNow = () => {
     <MaxWidth className="py-20 space-y-10">
       <div className="flex items-center gap-3 flex-wrap">
         <Link to={"/"} className="font-normal text-sm text-zinc-400">
-          Account
+          {t({ uz: "Hisob", ru: "Аккаунт", en: "Account" })}
         </Link>
         /
         <Link to={"/"} className="font-normal text-sm text-zinc-400">
-          My Account
+          {t({ uz: "Mening hisobim", ru: "Мой аккаунт", en: "My Account" })}
         </Link>
         /
         <Link to={"/"} className="font-normal text-sm text-zinc-400">
-          Product
+          {t({ uz: "Mahsulot", ru: "Продукт", en: "Product" })}
         </Link>
         /
         <Link to={"/"} className="font-normal text-sm text-zinc-400">
-          View Cart
+          {t({
+            uz: "Savatchani ko‘rish",
+            ru: "Просмотр корзины",
+            en: "View Cart",
+          })}
         </Link>
         /
         <span className="text-black font-normal text-sm cursor-pointer">
-          CheckOut
+          {t({ uz: "To‘lov", ru: "Оформить заказ", en: "CheckOut" })}
         </span>
       </div>
-      <h1 className="font-medium text-4xl">Billing Details</h1>
+      <h1 className="font-medium text-4xl">
+        {t({
+          uz: "To‘lov ma'lumotlari",
+          ru: "Платежные данные",
+          en: "Billing Details",
+        })}
+      </h1>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="flex gap-10 max-md:flex-col justify-between items-center"
@@ -125,8 +137,10 @@ const BuyNow = () => {
         <div className="md:max-w-[470px] w-full space-y-2">
           <div className="space-y-2">
             <Label className="flex items-center" htmlFor="firstName">
-              First Name <span className="text-red">*</span>
+              {t({ uz: "Ism", ru: "Имя", en: "First Name" })}{" "}
+              <span className="text-red">*</span>
             </Label>
+
             <Input
               {...register("billingDetails.firstName")}
               className="bg-[#F5F5F5]"
@@ -141,9 +155,11 @@ const BuyNow = () => {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="streetAddress" className="flex items-center">
-              Address <span className="text-red">*</span>
+            <Label className="flex items-center" htmlFor="streetAddress">
+              {t({ uz: "Manzil", ru: "Адрес", en: "Address" })}{" "}
+              <span className="text-red">*</span>
             </Label>
+
             <Input
               {...register("billingDetails.streetAddress")}
               className="bg-[#F5F5F5]"
@@ -159,8 +175,10 @@ const BuyNow = () => {
 
           <div className="space-y-2">
             <Label className="flex items-center" htmlFor="city">
-              Town/City <span className="text-red">*</span>
+              {t({ uz: "Shahar", ru: "Город", en: "Town/City" })}{" "}
+              <span className="text-red">*</span>
             </Label>
+
             <Input
               {...register("billingDetails.city")}
               className="bg-[#F5F5F5]"
@@ -176,8 +194,14 @@ const BuyNow = () => {
 
           <div className="space-y-2">
             <Label className="flex items-center" htmlFor="phone">
-              Phone Number <span className="text-red">*</span>
+              {t({
+                uz: "Telefon raqami",
+                ru: "Телефонный номер",
+                en: "Phone Number",
+              })}{" "}
+              <span className="text-red">*</span>
             </Label>
+
             <Input
               {...register("billingDetails.phone")}
               className="bg-[#F5F5F5]"
@@ -193,8 +217,14 @@ const BuyNow = () => {
 
           <div className="space-y-2">
             <Label className="flex items-center" htmlFor="email">
-              Email Address <span className="text-red">*</span>
+              {t({
+                uz: "Email manzilingiz",
+                ru: "Эл. почта",
+                en: "Email Address",
+              })}{" "}
+              <span className="text-red">*</span>
             </Label>
+
             <Input
               {...register("billingDetails.email")}
               className="bg-[#F5F5F5]"
@@ -211,7 +241,11 @@ const BuyNow = () => {
           <div className="flex gap-2 items-center">
             <Checkbox />{" "}
             <p className="text-base font-normal">
-              Save this information for faster check-out next time
+              {t({
+                uz: "Keyingi xaridlar uchun ma'lumotlarni saqlash",
+                ru: "Сохранить эту информацию для быстрой оплаты в следующий раз",
+                en: "Save this information for faster check-out next time",
+              })}
             </p>
           </div>
         </div>
@@ -228,20 +262,47 @@ const BuyNow = () => {
                 />
                 <p className="font-normal text-base">{product?.title}</p>
               </div>
-              <p className="font-normal text-base">${product?.price}</p>
+              <p className="font-normal text-base">
+                {formatPrice(product?.price || 0)}
+              </p>
             </div>
 
             <div className="flex items-center justify-between border-b pb-3 border-black">
-              <p className="font-normal text-base">Subtotal:</p>
-              <p className="font-normal text-base">${product?.price}</p>
+              <p className="font-normal text-base">
+                {" "}
+                {t({
+                  uz: "Oraliq summa:",
+                  ru: "Промежуточная сумма:",
+                  en: "Subtotal:",
+                })}
+              </p>
+              <p className="font-normal text-base">
+                {formatPrice(product?.price || 0)}
+              </p>
             </div>
             <div className="flex items-center justify-between border-b pb-3 border-black">
-              <p className="font-normal text-base">Shipping:</p>
-              <p className="font-normal text-base">Free</p>
+              <p className="font-normal text-base">
+                {t({
+                  uz: "Yetkazib berish:",
+                  ru: "Доставка:",
+                  en: "Shipping:",
+                })}
+              </p>
+              <p className="font-normal text-base">
+                {t({
+                  uz: "Bepul",
+                  ru: "Бесплатно",
+                  en: "Free",
+                })}
+              </p>
             </div>
             <div className="flex items-center justify-between">
-              <p className="font-normal text-base">Total:</p>
-              <p className="font-normal text-base">${product?.price}</p>
+              <p className="font-normal text-base">
+                {t({ uz: "Jami:", ru: "Итого:", en: "Total:" })}
+              </p>
+              <p className="font-normal text-base">
+                {formatPrice(product?.price || 0)}
+              </p>
             </div>
           </div>
 
@@ -252,7 +313,17 @@ const BuyNow = () => {
               variant="destructive"
               size="lg"
             >
-              {loading ? "Yuborilmoqda..." : "Place Order"}
+              {loading
+                ? t({
+                    uz: "Yuborilmoqda...",
+                    ru: "Отправка...",
+                    en: "Sending...",
+                  })
+                : t({
+                    uz: "Buyurtma berish",
+                    ru: "Оформить заказ",
+                    en: "Place Order",
+                  })}
             </Button>
           </div>
         </div>

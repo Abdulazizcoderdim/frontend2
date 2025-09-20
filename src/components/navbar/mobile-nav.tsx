@@ -6,9 +6,11 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { t } from "@/lib/translate";
 import { cn } from "@/lib/utils";
 import { getTotalCartQuantity } from "@/redux/cartSlice";
 import { getTotalWishListQuantity } from "@/redux/wishlistSlice";
+import { useLangStore } from "@/store/languageStore";
 import { Menu, Search } from "lucide-react";
 import { useState } from "react";
 import { CiHeart } from "react-icons/ci";
@@ -23,6 +25,7 @@ const MobileNav = () => {
   const { pathname } = useLocation();
   const totalWishListItems = useSelector(getTotalWishListQuantity);
   const totalItems = useSelector(getTotalCartQuantity);
+  const { lang } = useLangStore();
 
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -40,7 +43,7 @@ const MobileNav = () => {
           </SheetTitle>
           <SheetDescription>
             <div className="flex flex-col">
-              {navItems.map((item, i) => {
+              {navItems[lang].map((item, i) => {
                 const isActive = pathname === item.href;
                 return (
                   <Button
@@ -67,7 +70,11 @@ const MobileNav = () => {
                   }, 300);
                 }}
               >
-                Category
+                {t({
+                  uz: "Kategoriyalar",
+                  ru: "Категории",
+                  en: "Categories",
+                })}
               </Button>
             </div>
           </SheetDescription>

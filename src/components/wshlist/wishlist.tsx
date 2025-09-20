@@ -1,3 +1,5 @@
+import { formatPrice } from "@/hooks/formatPrice";
+import { t } from "@/lib/translate";
 import { cn } from "@/lib/utils";
 import { addItem, deleteItem, moveAllToCart } from "@/redux/cartSlice";
 import {
@@ -62,9 +64,20 @@ const Wishlist = () => {
     <div>
       <MaxWidth className="py-20 space-y-5">
         <div className="flex justify-between gap-3">
-          <p className="font-normal text-xl">Wishlist ({totalWishListItems})</p>
+          <p className="font-normal text-xl">
+            {t({
+              uz: "Sevimli ro‘yxati",
+              ru: "Список желаемого",
+              en: "Wishlist",
+            })}
+            ({totalWishListItems})
+          </p>
           <Button onClick={moveAllToBag} variant={"outline"} size={"lg"}>
-            Move All To Bag
+            {t({
+              uz: "Hammasini savatchaga qo‘shish",
+              ru: "Добавить все в корзину",
+              en: "Move All To Bag",
+            })}
           </Button>
         </div>
 
@@ -83,10 +96,6 @@ const Wishlist = () => {
                 const isInCart = cartItems.some(
                   (item: IProduct) => item._id === product._id
                 );
-                // ); // Mahsulot savatda ekanligini tekshirish
-                // const isInWishList = wishlistItems.some(
-                //   (item: ProductType) => item._id === product._id
-                // );
 
                 return (
                   <SwiperSlide key={i} className="min-h-[350px]">
@@ -115,7 +124,19 @@ const Wishlist = () => {
 
                         <button
                           onClick={() => handleCartToggle(product)}
-                          title={isInCart ? "Remove from cart" : "Add to cart"}
+                          title={
+                            isInCart
+                              ? t({
+                                  uz: "Savatchadan olib tashlash",
+                                  ru: "Удалить из корзины",
+                                  en: "Remove from cart",
+                                })
+                              : t({
+                                  uz: "Savatchaga qo‘shish",
+                                  ru: "Добавить в корзину",
+                                  en: "Add to cart",
+                                })
+                          }
                           className={cn(
                             "absolute transition-all duration-300 rounded-b-md cursor-pointer bottom-0 right-0 left-0 w-full bg-black text-white text-center py-2",
                             isInCart
@@ -124,18 +145,25 @@ const Wishlist = () => {
                           )}
                         >
                           <p className="text-center font-medium text-base">
-                            {isInCart ? "Remove from Cart" : "Add To Cart"}
+                            {isInCart
+                              ? t({
+                                  uz: "Savatchadan olib tashlash",
+                                  ru: "Удалить из корзины",
+                                  en: "Remove from Cart",
+                                })
+                              : t({
+                                  uz: "Savatchaga qo‘shish",
+                                  ru: "Добавить в корзину",
+                                  en: "Add To Cart",
+                                })}
                           </p>
                         </button>
                       </div>
                       <p className="font-medium text-base">{product.name}</p>
                       <div className="space-x-3">
                         <span className="font-medium text-base text-red">
-                          ${product.price.toString()}
+                          {formatPrice(product.price)}
                         </span>
-                        {/* <span className="line-through font-medium text-base text-zinc-600">
-                        ${product.price.originalPrice}
-                      </span> */}
                       </div>
                     </div>
                   </SwiperSlide>
@@ -144,7 +172,13 @@ const Wishlist = () => {
             </Swiper>
           </div>
         ) : (
-          <p className="text-center">WishList Epmty</p>
+          <p className="text-center">
+            {t({
+              uz: "Sevimli ro‘yxati bo‘sh",
+              ru: "Список желаемого пуст",
+              en: "Wishlist Empty",
+            })}
+          </p>
         )}
 
         <JustForYou />

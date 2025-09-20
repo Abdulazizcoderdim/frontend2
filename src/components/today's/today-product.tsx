@@ -1,3 +1,4 @@
+import { t } from "@/lib/translate";
 import { IProduct } from "@/type";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useRef } from "react";
@@ -24,12 +25,22 @@ const TodayProduct = ({
     <div className="space-y-6">
       <div className="flex items-center gap-3">
         <div className="w-[20px] h-[40px] rounded-md bg-red" />
-        <p className="text-red font-semibold text-base">Today's</p>
+        <p className="text-red font-semibold text-base">
+          {t({
+            uz: "Bugun",
+            ru: "Сегодня",
+            en: "Today's",
+          })}
+        </p>
       </div>
       <div className="flex items-center justify-between">
         <div className="flex items-center max-md:justify-between w-full md:space-x-28">
           <p className="text-black font-semibold md:text-4xl text-2xl">
-            Flash Sales
+            {t({
+              uz: "Flash savdosi",
+              ru: "Флэш-продажи",
+              en: "Flash Sales",
+            })}
           </p>
           {/* <CountdownTimer daysToCount={4} /> */}
         </div>
@@ -88,7 +99,13 @@ const TodayProduct = ({
           variant={"destructive"}
           className="font-medium text-base"
         >
-          <Link to={"/shop"}>View All Products</Link>
+          <Link to={"/shop"}>
+            {t({
+              uz: "Ko'proq mahsulotlar",
+              ru: "Посмотреть все продукты",
+              en: "View All Products",
+            })}
+          </Link>
         </Button>
       </div>
     </div>

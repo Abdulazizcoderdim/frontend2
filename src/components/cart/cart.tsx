@@ -1,3 +1,4 @@
+import { t } from "@/lib/translate";
 import { Link } from "react-router-dom";
 import MaxWidth from "../max-width";
 import TableCart from "./table";
@@ -8,11 +9,11 @@ const Cart = () => {
       <MaxWidth className="py-20">
         <div className="flex items-center gap-3">
           <Link to={"/"} className="font-normal text-sm text-zinc-400">
-            Home
+            {t({ uz: "Bosh sahifa", ru: "Главная", en: "Home" })}
           </Link>{" "}
           /{" "}
           <span className="text-black font-normal text-sm cursor-pointer">
-            Cart
+            {t({ uz: "Savatcha", ru: "Корзина", en: "Cart" })}
           </span>
         </div>
 

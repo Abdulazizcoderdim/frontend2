@@ -1,3 +1,4 @@
+import { t } from "@/lib/translate";
 import { Link } from "react-router-dom";
 
 const Featured = () => {
@@ -5,12 +6,22 @@ const Featured = () => {
     <div className="space-y-10 mt-20">
       <div className="flex items-center gap-3">
         <div className="w-[20px] h-[40px] rounded-md bg-red" />
-        <p className="text-red font-semibold text-base">Featured</p>
+        <p className="text-red font-semibold text-base">
+          {t({
+            uz: "Tanlangan",
+            ru: "Рекомендуемые",
+            en: "Featured",
+          })}
+        </p>
       </div>
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-28">
           <p className="text-black font-semibold sm:text-4xl text-2xl">
-            New Arrival
+            {t({
+              uz: "Yangi kelgan",
+              ru: "Новинка",
+              en: "New Arrival",
+            })}
           </p>
         </div>
       </div>
@@ -28,11 +39,24 @@ const Featured = () => {
           <div className="absolute bottom-5 left-5 space-y-2 z-10">
             <h3 className="font-semibold text-xl lg:text-2xl">PlayStation 5</h3>
             <p className="font-normal text-xs lg:text-sm pb-2">
-              Black and White version of the PS5{" "}
-              <br className="hidden sm:inline" /> coming out on sale.
+              {t({
+                uz: "PS5 ning qora va oq versiyasi",
+                ru: "Чёрно-белая версия PS5",
+                en: "Black and White version of the PS5",
+              })}{" "}
+              <br className="hidden sm:inline" />{" "}
+              {t({
+                uz: "Sotuvga chiqmoqda",
+                ru: "Выходит в продажу",
+                en: "coming out on sale.",
+              })}
             </p>
             <Link to="#" className="underline font-medium text-sm lg:text-base">
-              Shop Now
+              {t({
+                uz: "Hozir xarid qiling",
+                ru: "Купить сейчас",
+                en: "Shop Now",
+              })}
             </Link>
           </div>
         </div>
@@ -49,17 +73,34 @@ const Featured = () => {
             </div>
             <div className="absolute bottom-5 left-5 space-y-2 z-10">
               <h3 className="font-semibold text-xl lg:text-2xl">
-                Women's Collections
+                {t({
+                  uz: "Ayollar kolleksiyalari",
+                  ru: "Женские коллекции",
+                  en: "Women's Collections",
+                })}
               </h3>
               <p className="font-normal text-xs lg:text-sm pb-2">
-                Featured woman collections that{" "}
-                <br className="hidden sm:inline" /> give you another vibe.
+                {t({
+                  uz: "Tanlangan ayollar kolleksiyalari",
+                  ru: "Рекомендуемые женские коллекции",
+                  en: "Featured women collections that",
+                })}{" "}
+                <br className="hidden sm:inline" />{" "}
+                {t({
+                  uz: "sizga boshqa bir kayfiyat bag‘ishlaydi.",
+                  ru: "дарят вам другое настроение.",
+                  en: "give you another vibe.",
+                })}
               </p>
               <Link
                 to="#"
                 className="underline font-medium text-sm lg:text-base"
               >
-                Shop Now
+                {t({
+                  uz: "Hozir xarid qiling",
+                  ru: "Купить сейчас",
+                  en: "Shop Now",
+                })}
               </Link>
             </div>
           </div>
@@ -75,15 +116,29 @@ const Featured = () => {
                 />
               </div>
               <div className="absolute bottom-5 left-5 space-y-2 z-10">
-                <h3 className="font-semibold text-xl lg:text-2xl">Speakers</h3>
+                <h3 className="font-semibold text-xl lg:text-2xl">
+                  {t({
+                    uz: "Karnaylar",
+                    ru: "Колонки",
+                    en: "Speakers",
+                  })}
+                </h3>
                 <p className="font-normal text-xs lg:text-sm pb-2">
-                  Amazon wireless speakers
+                  {t({
+                    uz: "Amazon simsiz karnaylar",
+                    ru: "Беспроводные колонки Amazon",
+                    en: "Amazon wireless speakers",
+                  })}
                 </p>
                 <Link
                   to="#"
                   className="underline font-medium text-sm lg:text-base"
                 >
-                  Shop Now
+                  {t({
+                    uz: "Hozir xarid qiling",
+                    ru: "Купить сейчас",
+                    en: "Shop Now",
+                  })}
                 </Link>
               </div>
             </div>
@@ -98,7 +153,13 @@ const Featured = () => {
                 />
               </div>
               <div className="absolute bottom-5 left-5 space-y-2 z-10">
-                <h3 className="font-semibold text-xl lg:text-2xl">Perfume</h3>
+                <h3 className="font-semibold text-xl lg:text-2xl">
+                  {t({
+                    uz: "Atir",
+                    ru: "Парфюм",
+                    en: "Perfume",
+                  })}
+                </h3>
                 <p className="font-normal text-xs lg:text-sm pb-2">
                   GUCCI INTENSE OUD EDP
                 </p>
@@ -106,7 +167,11 @@ const Featured = () => {
                   to="#"
                   className="underline font-medium text-sm lg:text-base"
                 >
-                  Shop Now
+                  {t({
+                    uz: "Hozir xarid qiling",
+                    ru: "Купить сейчас",
+                    en: "Shop Now",
+                  })}
                 </Link>
               </div>
             </div>
